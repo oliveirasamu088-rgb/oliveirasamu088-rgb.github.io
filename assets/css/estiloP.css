@@ -1,0 +1,139 @@
+/* estilo geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Deixamos o * sem background para não bugar o posicionamento da imagem */
+}
+
+/* Aplicando o fundo roxo no body, no cabeçalho e na seção do topo */
+body, html, header, section.topo-do-site {
+    background-color: #53046d ; 
+    color: white;
+}
+
+body {
+    background-color: #263363 ; 
+}
+
+/* Classes de fontes */
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.interface {
+    max-width: 1200px; 
+    margin: -30px auto;
+}
+.flex {
+    display: flex;
+}
+.btn-contato button {
+    padding: 10px 40px;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #278dc4;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+/* estilo do cabeçalho */
+header {
+    padding: 40px;
+}
+
+header > .interface {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header a {
+    color: #7d7d7d;
+    text-decoration: none;
+    display: inline-block;
+    transition: .2s;
+}
+header a:hover {
+    color: #36e210;
+    transform: scale(1.30);
+}
+header nav ul {
+     list-style-type: none;
+}
+
+header nav ul li {
+    display: inline-block;
+    padding: 0 40px;
+}
+
+.btn-contato button:hover {
+    box-shadow: 0px 0px 8px #08d6c8;
+    transform: scale(1.05);
+}
+
+/* Ajustes da Imagem do Topo */
+.img-topo-site {
+    display: inline-block;
+    width: 35%;               /* Diminuiu o tamanho da imagem */
+    height: auto;
+    margin-top: -60px;        /* Subiu a imagem sem bater no menu */
+    margin-left: 50px;        /* Afastou a imagem da frase */
+    position: relative;
+    animation: flutuar 4s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+/* Estilo do topo do site */
+section.topo-do-site {
+    padding: 40px 4%;
+}
+
+section.topo-do-site.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;                /* Espaço entre o texto e a imagem */
+}
+.topo-do-site .txt-topo-site {
+    max-width: 50%;           
+}
+.topo-do-site h1 {
+    color: azure;
+    font-size: 42px;
+    line-height: 40px;
+}
+.topo-do-site h1 span {
+    color: #7215eb;
+    font-size: 83px;
+}
+.topo-do-site .txt-topo-site p {
+    color: rgb(138, 222, 233);
+    margin: 40px 0;
+}
+
+/* Animação de flutuar corrigida para não empurrar a imagem para baixo */
+@keyframes flutuar {
+    0% {
+        ttransform: translateY(0);
+    }
+    100% {
+        transform: translateY(15px);
+    }
+}
+.cor-curriculo{
+    background-color: #1c033d;
+
+}
