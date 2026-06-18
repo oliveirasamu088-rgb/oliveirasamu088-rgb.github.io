@@ -1,16 +1,20 @@
 /* ==========================================================================
-    inicial
+   Variáveis Globais e Paleta de Cores
    ========================================================================== */
 :root {
     --bg-color: #0f172a;       /* Azul escuro moderno */
     --bg-cards: #1e293b;       /* Grafite para destaques */
     --primary-color: #3b82f6;  /* Azul Frontend */
     --accent-color: #10b981;   /* Verde esmeralda para detalhes */
+    --danger-color: #ef4444;   /* Vermelho para avisos/erros */
     --text-main: #f8fafc;      /* Branco fosco para leitura */
     --text-muted: #94a3b8;     /* Cinza para textos secundários */
     --transition: all 0.3s ease;
 }
 
+/* ==========================================================================
+   Reset e Configurações Gerais
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -27,25 +31,36 @@ body {
     min-height: 100vh;
 }
 
+.poppins-regular { font-weight: 400; font-style: normal; }
+.poppins-medium { font-weight: 500; font-style: normal; }
+.poppins-bold { font-weight: 700; font-style: normal; }
+
+.interface {
+    max-width: 1200px; 
+    margin: 0 auto;
+    width: 100%;
+}
+
 /* ==========================================================================
-   Header / Navegação
+   Header / Navegação Interativa
    ========================================================================== */
 .header {
     background-color: rgba(15, 23, 42, 0.9);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px;
 }
 
 .interface-header {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .logo-img {
@@ -79,7 +94,6 @@ body {
     color: var(--primary-color);
 }
 
-/* Linha interativa abaixo do menu ao passar o mouse */
 .main-menu ul li a::after {
     content: '';
     position: absolute;
@@ -96,32 +110,58 @@ body {
     width: 100%;
 }
 
+/* Botão de Contato Interno */
+.btn-primary-link {
+    text-decoration: none;
+}
+
+.btn-contato button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 28px;
+    border: 0;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    cursor: pointer;
+}
+
+.btn-contato button:hover {
+    background-color: #2563eb;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
 /* ==========================================================================
-   Conteúdo Principal (Hero Section)
+   Conteúdo Principal e Elementos de Requisitos (Puro CSS)
    ========================================================================== */
 .main-content {
     flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 60px 20px;
 }
 
-.topo-do-site {
-    max-width: 1200px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Divide meio a meio: Texto e Imagem */
-    gap: 50px;
-    align-items: center;
+.container-requisitos {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
 }
 
-/* Bloco de Texto */
+.txt-topo-site.centralizado {
+    text-align: center;
+}
+
 .txt-topo-site h1 {
     font-size: 3.5rem;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 10px;
+    color: var(--text-main);
 }
 
 .txt-topo-site h1 .ponto {
@@ -129,7 +169,7 @@ body {
 }
 
 .subtitulo {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: var(--accent-color);
     margin-bottom: 20px;
     font-weight: 600;
@@ -139,90 +179,154 @@ body {
     color: var(--text-muted);
     font-size: 1.1rem;
     line-height: 1.7;
-    margin-bottom: 35px;
+    max-width: 750px;
+    margin: 0 auto;
 }
 
-/* Botão Interativo */
-.btn-primary {
-    display: inline-flex;
+/* Grid Customizado de Requisitos */
+.grid-cards-requisitos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.card-requisito {
+    background-color: var(--bg-cards);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.card-requisito:hover {
+    transform: translateY(-5px);
+}
+
+.card-sucesso {
+    border-top: 4px solid var(--accent-color);
+}
+
+.card-falha {
+    border-top: 4px solid var(--danger-color);
+}
+
+.card-header-status {
+    display: flex;
     align-items: center;
-    gap: 10px;
-    background-color: var(--primary-color);
-    color: #fff;
-    text-decoration: none;
-    padding: 14px 30px;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: var(--transition);
-    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
-.btn-primary i {
-    transition: var(--transition);
+.card-header-status h3 {
+    font-size: 1.4rem;
+    color: var(--text-main);
 }
 
-.btn-primary:hover {
-    background-color: #2563eb;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+.icone-status {
+    font-size: 1.8rem;
 }
 
-.btn-primary:hover i {
-    transform: translateX(5px);
+.icone-status.verde { color: var(--accent-color); }
+.icone-status.vermelho { color: var(--danger-color); }
+
+.card-intro {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
 }
 
-/* Bloco da Imagem */
+.lista-requisitos {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.lista-requisitos li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.lista-requisitos li i {
+    font-size: 1.1rem;
+    margin-top: 3px;
+}
+
+
 .img-topo-site {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100px;
+    height: 120px;
 }
 
-/* Círculo decorativo moderno atrás da foto */
-.avatar-bg {
-    position: relative;
-    width: 380px;
-    height: 380px;
-    background: linear-gradient(135deg, var(--primary-color), var(--bg-cards));
-    border-radius: 50%;
+.text-primary { color: var(--primary-color) !important; }
+.text-danger { color: var(--danger-color) !important; }
+
+/* Bloco Técnico Inferior */
+.card-tecnico {
+    background-color: var(--bg-cards);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-tecnico h4 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+.grid-tecnico-badges {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.badge-tecnico {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 8px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    animation: float 6s ease-in-out infinite; /* Efeito flutuante */
+    flex-direction: column;
+    gap: 5px;
 }
 
-.avatar-bg img {
-    width: 90%;
-    height: 90%;
-    object-fit: contain;
-    border-radius: 50%;
+.badge-tecnico span {
+    color: var(--text-main);
+    font-size: 0.95rem;
 }
 
-/* Animação de Flutuar para a Imagem */
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+.badge-tecnico small {
+    color: var(--text-muted);
+    font-size: 0.75rem;
 }
 
 /* ==========================================================================
    Footer (Rodapé)
    ========================================================================== */
 .pagina-footer {
-    background-color: #0b0f19;
+    background-color: #0b1329; 
     padding: 40px 20px 20px 20px;
     margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .social-section {
-    max-width: 1200px;
-    margin: 0 auto;
     text-align: center;
+    margin-bottom: 25px;
 }
 
 .social-section h3 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--text-muted);
@@ -249,18 +353,18 @@ body {
     transition: var(--transition);
 }
 
-/* Cores interativas para as redes sociais ao passar o mouse */
 .btn-social.whatsapp:hover { background-color: #25d366; color: #fff; }
 .btn-social.linkedin:hover { background-color: #0077b5; color: #fff; }
 .btn-social.github:hover { background-color: #333; color: #fff; }
 
 .btn-social:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .footer-line {
     max-width: 1200px;
-    margin: 30px auto;
+    margin: 25px auto;
     border: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -287,26 +391,21 @@ body {
 }
 
 /* ==========================================================================
-   Media Queries (Responsividade)
+   Media Queries (Responsividade Pura)
    ========================================================================== */
 
-/* Telas médias (Tablets) */
 @media (max-width: 992px) {
     .txt-topo-site h1 {
-         font-size: 2.8rem; 
-        }
+        font-size: 2.8rem; 
+    }
     .subtitulo { 
-        font-size: 1.5rem;
-     }
-    .avatar-bg {
-         width: 300px; height: 300px; }
-}
-.avatar-bg img{
-    width: 900px;
-  height: 680px;
+        font-size: 1.4rem;
+    }
+    .grid-tecnico-badges {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-/* Telas pequenas (Celulares) */
 @media (max-width: 768px) {
     .interface-header {
         flex-direction: column;
@@ -319,19 +418,13 @@ body {
         justify-content: center;
     }
 
-    .topo-do-site {
-        grid-template-columns: 1fr; /* Transforma em uma única coluna */
-        text-align: center;
-        gap: 40px;
+    .grid-cards-requisitos {
+        grid-template-columns: 1fr; /* Transiciona para coluna única em telas pequenas */
+        gap: 20px;
     }
 
-    .img-topo-site {
-        grid-row: 1; /* Move a imagem para cima do texto no celular, o que melhora o visual */
-    }
-
-    .avatar-bg {
-        width: 260px;
-        height: 260px;
+    .card-requisito {
+        padding: 25px;
     }
 
     .legal-section {

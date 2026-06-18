@@ -152,4 +152,6 @@ formPost.addEventListener('submit', function(e) {
             alternarFormulario(); // Esconde o formulário de volta após postar
         });
 
-        renderizarPosts();         
+        renderizarPosts(); 
+
+        
