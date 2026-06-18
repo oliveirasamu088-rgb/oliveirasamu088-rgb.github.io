@@ -1,158 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Samuel de oliveira</title>
+    <title>Blog ADS - Samuel de Oliveira</title>
+    <!-- Bootstrap para Grid e Estrutura -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- O seu CSS Otimizado -->
     <link rel="stylesheet" href="assets/css/estiloB.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-    <header>
-        <div class="interface">
+
+    <!-- HEADER INTEGRADO -->
+    <header class="header">
+        <div class="interface-header">
             <div class="logo">
-                <a href="#">
-                    <img src="imagens/icones/logo.png" alt="canto-dev">
+                <a href="index.html">
+                    <img src="imagens/icones/logo.png" alt="canto-dev" class="logo-img">
                 </a>
             </div>
+            <!-- CORRIGIDO: Classe trocada para menu-desktop para ativar os efeitos ciano -->
             <nav class="menu-desktop">
                 <ul>
                     <li><a href="index.html">Início</a></li>
                     <li><a href="curriculo.html">Currículo</a></li>
-                    <li><a href="blog.html">blog</a></li>
-                    <li><a href="projetos.html">projetos</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="projetos.html">Projetos</a></li>                
                 </ul>
             </nav>
             <div class="btn-contato">
-                <a href="contato.html"><button>contato</button></a>
+                <a href="contato.html"><button>Contato</button></a>
             </div>
         </div>
     </header>
 
-    <main>
-        <section class="topo-do-site">
-            <div class="interface">
-                <div class="flex">
-                    <div class="txt-topo-site">
-                        <h1>Meu Blog <span>.</span></h1>
-                        <p>Compartilhando aprendizados, tutoriais e as últimas novidades sobre o mundo do desenvolvimento web e tecnologia.</p>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container my-5 pt-4">
+        
+        <!-- SEÇÃO DE DESTAQUE -->
+        <section class="mb-5">
+            <!-- CORRIGIDO: Removido style inline antigo, herda as cores do tema nativamente -->
+            <h2 class="fw-bold pb-2 mb-4 section-title-line">
+                <i class="fa-solid fa-star me-2 animate-glow"></i>Em Destaque
+            </h2>
+            <div class="row g-4">
+                <div class="col-md-12">
+                    <!-- CORRIGIDO: Classes do card unificadas -->
+                    <div class="card blog-card featured-card text-white">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge">Artigo Premium</span>
+                            <small class="text-muted">17 de Junho, 2026</small>
+                        </div>
+                        <h3 class="fw-bold my-2">O Futuro de ADS: Arquitetura de Software e Computação em Nuvem</h3>
+                        <p class="mb-3">
+                            A análise e desenvolvimento de sistemas mudou. Compreender como integrar microsserviços, gerenciar Docker containers e implantar soluções escaláveis na AWS ou Google Cloud virou pré-requisito indispensável para o desenvolvedor moderno.
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <span class="small fw-semibold">Por: Samuel de Oliveira</span>
+                            <a href="#" class="read-more">Ler Mais</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="conteudo-blog my-5">
-            <div class="interface container">
-                <h2 class="mb-4 text-white">Últimas Postagens</h2>
-                <div class="row g-4">
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 bg-dark text-white border-secondary">
-                            <div class="card-body">
-                                <span class="badge bg-primary mb-2">Frontend</span>
-                                <h5 class="card-title">O Futuro do React em 2026</h5>
-                                <p class="card-text">O que muda com as novas atualizações de renderização no ecossistema React.</p>
-                                <a href="#" class="btn btn-outline-light btn-sm">Ler mais</a>
-                            </div>
+        <!-- GRID PRINCIPAL (FORMULÁRIO + FEED) -->
+        <div class="row g-5">
+            
+            <!-- LATERAL: FORMULÁRIO DE NOVA PUBLICAÇÃO -->
+            <div class="col-lg-4">
+                <!-- CORRIGIDO: Removido background fixo inline, herda var(--bg-card) do CSS -->
+                <div class="card blog-card p-4 sticky-top" style="top: 110px; z-index: 10;">
+                    <h4 class="fw-bold mb-3">
+                        <i class="fa-solid fa-pen-to-square me-2"></i>Nova Publicação
+                    </h4>
+                    <p class="small text-muted mb-4">Adicione novos artigos sobre programação e ADS diretamente no seu feed.</p>
+                    
+                    <form id="form-novo-post">
+                        <div class="mb-3">
+                            <label class="form-label small fw-medium">Título do Artigo</label>
+                            <input type="text" id="post-titulo" class="form-control" placeholder="Ex: Dominando as Promises no JS" required>
                         </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 bg-dark text-white border-secondary">
-                            <div class="card-body">
-                                <span class="badge bg-success mb-2">CSS</span>
-                                <h5 class="card-title">Dominando CSS Grid e Flexbox</h5>
-                                <p class="card-text">Dicas definitivas para criar layouts responsivos sem quebrar a cabeça.</p>
-                                <a href="#" class="btn btn-outline-light btn-sm">Ler mais</a>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-medium">Categoria / Tag</label>
+                            <select id="post-categoria" class="form-select" required>
+                                <option value="Frontend">Frontend</option>
+                                <option value="Backend">Backend</option>
+                                <option value="ADS / Engenharia">ADS / Engenharia</option>
+                                <option value="Banco de Dados">Banco de Dados</option>
+                            </select>
                         </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 bg-dark text-white border-secondary">
-                            <div class="card-body">
-                                <span class="badge bg-warning text-dark mb-2">JavaScript</span>
-                                <h5 class="card-title">JavaScript Assíncrono</h5>
-                                <p class="card-text">Entenda de uma vez por todas as Promises, Async e Await na prática.</p>
-                                <a href="#" class="btn btn-outline-light btn-sm">Ler mais</a>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-medium">URL da Imagem de Capa</label>
+                            <input type="url" id="post-imagem" class="form-control" placeholder="https://exemplo.com/foto.jpg">
+                            <div class="form-text text-muted" style="font-size: 0.75rem;">Você pode deixar em branco para usar uma imagem padrão de código.</div>
                         </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 bg-dark text-white border-secondary">
-                            <div class="card-body">
-                                <span class="badge bg-danger mb-2">Ferramentas</span>
-                                <h5 class="card-title">Extensões Essenciais para o VS Code</h5>
-                                <p class="card-text">Aumente sua produtividade no Frontend com esses plugins indispensáveis.</p>
-                                <a href="#" class="btn btn-outline-light btn-sm">Ler mais</a>
-                            </div>
+                        <div class="mb-4">
+                            <label class="form-label small fw-medium">Conteúdo do Artigo</label>
+                            <textarea id="post-conteudo" rows="5" class="form-control" placeholder="Escreva o texto do seu post aqui..." required></textarea>
                         </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 bg-dark text-white border-secondary">
-                            <div class="card-body">
-                                <span class="badge bg-info text-dark mb-2">Carreira</span>
-                                <h5 class="card-title">Como Criar um Portfólio de Impacto</h5>
-                                <p class="card-text">Dicas para destacar seus projetos e chamar a atenção de recrutadores.</p>
-                                <a href="#" class="btn btn-outline-light btn-sm">Ler mais</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 bg-dark text-white border-secondary">
-                            <div class="card-body">
-                                <span class="badge bg-primary mb-2">Frameworks</span>
-                                <h5 class="card-title">Por que Aprender Next.js?</h5>
-                                <p class="card-text">As vantagens de usar SSR e SSG em aplicações web modernas.</p>
-                                <a href="#" class="btn btn-outline-light btn-sm">Ler mais</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 bg-dark text-white border-secondary">
-                            <div class="card-body">
-                                <span class="badge bg-secondary mb-2">Git</span>
-                                <h5 class="card-title">Guia de Sobrevivência ao Git</h5>
-                                <p class="card-text">Os comandos mais utilizados no dia a dia de um desenvolvedor.</p>
-                                <a href="#" class="btn btn-outline-light btn-sm">Ler mais</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 bg-dark text-white border-secondary">
-                            <div class="card-body">
-                                <span class="badge bg-light text-dark mb-2">Performance</span>
-                                <h5 class="card-title">Otimização de Sites para Mobile</h5>
-                                <p class="card-text">Como melhorar o carregamento e a experiência do usuário em smartphones.</p>
-                                <a href="#" class="btn btn-outline-light btn-sm">Ler mais</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 bg-dark text-white border-secondary">
-                            <div class="card-body">
-                                <span class="badge bg-dark border mb-2">IA</span>
-                                <h5 class="card-title">IAs no Desenvolvimento Web</h5>
-                                <p class="card-text">Como usar copilotos de código de forma inteligente sem perder a essência.</p>
-                                <a href="#" class="btn btn-outline-light btn-sm">Ler mais</a>
-                            </div>
-                        </div>
-                    </div>
-
-                     
-                        </div>
-                    </div>
-
+                        <!-- CORRIGIDO: Botão agora utiliza a classe global btn-primary definida no CSS -->
+                        <button type="submit" class="btn-primary w-100">
+                            Publicar no Blog <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
-        </section>
+
+            <!-- ÁREA DOS ARTIGOS RECENTES -->
+            <div class="col-lg-8">
+                <h2 class="fw-bold pb-2 mb-4 section-title-line">
+                    <i class="fa-solid fa-newspaper me-2"></i>Artigos Recentes
+                </h2>
+                
+                <!-- O app.js vai injetar os cards aqui dentro. Certifique-se de que o JS use a classe .blog-card para a estilização correta -->
+                <div id="feed-artigos" class="row row-cols-1 g-4">
+                    <!-- Cards dinâmicos inseridos via JavaScript -->
+                </div>
+            </div>
+
+        </div>
     </main>
+
+    <script src="assets/js/app.js"></script> 
 </body>
 </html>
