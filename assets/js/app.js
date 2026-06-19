@@ -152,6 +152,114 @@ formPost.addEventListener('submit', function(e) {
             alternarFormulario(); // Esconde o formulário de volta após postar
         });
 
-        renderizarPosts(); 
+        renderizarPosts();
+
+        // Seleção dos elementos do DOM
+const form = document.getElementById('form-novo-post');
+const feedArtigos = document.getElementById('feed-artigos');
+
+// 1. CARREGAR POSTS AO INICIAR A PÁGINA
+// Busca os posts salvos ou inicia um array vazio se não houver nenhum
+let posts = JSON.parse(localStorage.getItem('posts_blog')) || [];
+
+// Função para renderizar (mostrar) os posts na tela
+function renderizarPosts() {
+    feedArtigos.innerHTML = ''; // Limpa o feed para não duplicar
+
+    if (posts.length === 0) {
+        feedArtigos.innerHTML = '<p class="text-muted text-center py-4">Nenhum artigo publicado ainda. Seja o primeiro!</p>';
+        return;
+    }
+
+    // Mapeia o array e cria o HTML de cada card
+    posts.forEach((post, index) => {
+        const cardHtml = `
+            <div class="col">
+                <div class="card blog-card p-4 text-white mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-info text-dark">${post.categoria}</span>
+                        <small class="text-muted">${post.data}</small>
+                    </div>
+                    ${post.imagem ? `<img src="${post.imagem}" class="img-fluid rounded mb-3" alt="${post.titulo}" style="max-height: 250px; object-fit: cover;">` : ''}
+                    <h3 class="fw-bold my-2">${post.titulo}</h3>
+                    <p class="mb-3">${post.conteudo}</p>
+                    <div class="d-flex align-items-center justify-content-between mt-2">
+                        <span class="small fw-semibold">Por: Samuel de Oliveira</span>
+                        <button onclick="apagarPost(${index})" class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash-can me-1"></i> Apagar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        feedArtigos.innerHTML += cardHtml;
+    });
+}
+
+// 2. FUNÇÃO ADICIONAR NOVO POST
+form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que a página recarregue
+
+    // Captura os valores dos inputs
+    const titulo = document.getElementById('post-titulo').value;
+    const categoria = document.getElementById('post-categoria').value;
+    let imagem = document.getElementById('post-imagem').value;
+    const conteudo = document.getElementById('post-conteudo').value;
+
+    // Se a imagem estiver vazia, define uma imagem padrão de código
+    if (!imagem) {
+        imagem = 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=600&auto=format&fit=crop';
+    }
+
+    // Formata a data atual
+    const dataAtual = new Date().toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    // Cria o objeto do novo post
+    const novoPost = {
+        titulo,
+        categoria,
+        imagem,
+        conteudo,
+        data: dataAtual
+    };
+
+    // Adiciona o novo post no topo da lista (recente primeiro)
+    posts.unshift(novoPost);
+
+    // Salva no LocalStorage e atualiza a tela
+    salvarNoLocalStorage();
+    renderizarPosts();
+
+    // Limpa o formulário
+    form.reset();
+});
+
+// 3. CRUCIAL: FUNÇÃO PARA APAGAR UM POST POR VEZ
+function apagarPost(indexParaRemover) {
+    // Exibe uma confirmação simples para o usuário
+    if (confirm("Tem certeza que deseja apagar este artigo?")) {
+        
+        // Remove exatamente 1 elemento baseado na posição (index) dele no array
+        posts.splice(indexParaRemover, 1);
+        
+        // Atualiza o LocalStorage com a nova lista (sem o post deletado)
+        salvarNoLocalStorage();
+        
+        // Atualiza a tela para exibir a lista correta
+        renderizarPosts();
+    }
+}
+
+// Função auxiliar para salvar os dados no navegador
+function salvarNoLocalStorage() {
+    localStorage.setItem('posts_blog', JSON.stringify(posts));
+}
+
+// Executa a renderização assim que a página abre
+renderizarPosts();
 
         
