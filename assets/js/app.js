@@ -89,60 +89,49 @@ const postsIniciais = [
     }
 ];
 
-let dbPosts = JSON.parse(localStorage.getItem('blog_posts')) || postsIniciais;
+let posts = JSON.parse(localStorage.getItem('posts_blog')) || postsIniciais;
 
-const feedContainer = document.getElementById('feed-artigos');
-const formPost = document.getElementById('form-novo-post');
+const feedArtigos = document.getElementById('feed-artigos');
+const form = document.getElementById('form-novo-post');
 
 function renderizarPosts() {
-    feedContainer.innerHTML = ''; 
-    
-    if (dbPosts.length === 0) {
-        feedContainer.innerHTML = '<p class="text-muted text-center py-4">Nenhum artigo publicado ainda. Seja o primeiro!</p>';
+    if (!feedArtigos) return;
+    feedArtigos.innerHTML = ''; 
+
+    if (posts.length === 0) {
+        feedArtigos.innerHTML = '<p class="text-muted text-center py-4">Nenhum artigo publicado ainda. Seja o primeiro!</p>';
         return;
     }
 
-    dbPosts.slice().reverse().forEach((post, indexInvertido) => {
-        const indexReal = dbPosts.length - 1 - indexInvertido;
-        const imgCapa = post.imagem ? post.imagem : "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=500&auto=format&fit=crop&q=60";
+    posts.forEach((post, index) => {
+        const imgCapa = post.imagem ? post.imagem : "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=600&auto=format&fit=crop";
         
         const cardHtml = `
             <div class="col">
-                <div class="card blog-card h-100 text-white overflow-hidden shadow-sm">
-                    <div class="row g-0 h-100">
-                        <div class="col-md-4">
-                            <img src="${imgCapa}" class="img-fluid h-100 w-100" style="object-fit: cover; min-height: 200px;" alt="Capa do post">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body p-4 d-flex flex-column h-100">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <span class="badge" style="background-color: var(--bg-color); color: var(--primary-color); border: 1px solid var(--primary-color);">${post.categoria}</span>
-                                    <small style="color: var(--text-muted);">${post.data}</small>
-                                </div>
-                                <h4 class="fw-bold card-title mb-2" style="color: var(--text-main);">${post.titulo}</h4>
-                                <p class="card-text small style-muted mb-4" style="color: var(--text-muted); flex-grow: 1;">${post.conteudo}</p>
-                                <div class="d-flex align-items-center justify-content-between mt-auto">
-                                    <span class="small" style="color: var(--text-muted); font-size:0.85rem;">Por: Samuel de Oliveira</span>
-                                    <div class="d-flex gap-2">
-                                        <button onclick="apagarPost(${indexReal})" class="btn btn-sm btn-outline-danger">
-                                            <i class="fa-solid fa-trash-can"></i> Apagar
-                                        </button>
-                                        <a href="#" class="btn btn-sm btn-link text-decoration-none" style="color: var(--primary-color); font-weight:500;">Ler Post <i class="fa-solid fa-arrow-right ms-1"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card blog-card p-4 text-white mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-info text-dark">${post.categoria}</span>
+                        <small class="text-muted">${post.data}</small>
+                    </div>
+                    <img src="${imgCapa}" class="img-fluid rounded mb-3" alt="${post.titulo}" style="max-height: 250px; object-fit: cover;">
+                    <h3 class="fw-bold my-2">${post.titulo}</h3>
+                    <p class="mb-3">${post.conteudo}</p>
+                    <div class="d-flex align-items-center justify-content-between mt-2">
+                        <span class="small fw-semibold">Por: Samuel de Oliveira</span>
+                        <button onclick="apagarPost(${index})" class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash-can me-1"></i> Apagar
+                        </button>
                     </div>
                 </div>
             </div>
         `;
-        feedContainer.innerHTML += cardHtml;
+        feedArtigos.innerHTML += cardHtml;
     });
 }
 
-if (formPost) {
-    formPost.addEventListener('submit', function(e) {
-        e.preventDefault();
+if (form) {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
         const titulo = document.getElementById('post-titulo').value;
         const categoria = document.getElementById('post-categoria').value;
@@ -153,32 +142,31 @@ if (formPost) {
             imagem = 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=600&auto=format&fit=crop';
         }
 
-        const opcoesData = { day: 'numeric', month: 'short', year: 'numeric' };
-        const hoje = new Date().toLocaleDateString('pt-BR', opcoesData);
+        const dataAtual = new Date().toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+        });
 
-        const novoPost = { titulo, categoria, imagem, conteudo, data: hoje };
+        const novoPost = { titulo, categoria, imagem, conteudo, data: dataAtual };
 
-        dbPosts.push(novoPost);
+        posts.unshift(novoPost);
         salvarNoLocalStorage();
-
         renderizarPosts();
-        formPost.reset();
-        if (typeof alternarFormulario === 'function') {
-            alternarFormulario();
-        }
+        form.reset();
     });
 }
 
 function apagarPost(indexParaRemover) {
     if (confirm("Tem certeza que deseja apagar este artigo?")) {
-        dbPosts.splice(indexParaRemover, 1);
+        posts.splice(indexParaRemover, 1);
         salvarNoLocalStorage();
         renderizarPosts();
     }
 }
 
 function salvarNoLocalStorage() {
-    localStorage.setItem('blog_posts', JSON.stringify(dbPosts));
+    localStorage.setItem('posts_blog', JSON.stringify(posts));
 }
 
 renderizarPosts();

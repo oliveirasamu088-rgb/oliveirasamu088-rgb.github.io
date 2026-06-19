@@ -1,20 +1,16 @@
 
-        /* ==========================================================================
-           Variáveis Globais e Paleta de Cores (Idênticas ao Blog)
-           ========================================================================== */
+        
         :root {
-            --bg-color: #0f172a;       /* Azul escuro moderno */
-            --bg-cards: #1e293b;       /* Grafite para destakes */
-            --primary-color: #3b82f6;  /* Azul Frontend */
-            --accent-color: #10b981;   /* Verde esmeralda para detalhes */
-            --text-main: #f8fafc;      /* Branco fosco para leitura */
-            --text-muted: #94a3b8;     /* Cinza para textos secundários */
+            --bg-color: #0f172a;        
+            --bg-cards: #1e293b;        
+            --primary-color: #3b82f6;   
+            --accent-color: #10b981;    
+            --text-main: #f8fafc;      
+            --text-muted: #94a3b8;      
             --transition: all 0.3s ease;
         }
 
-        /* ==========================================================================
-           Reset e Configurações Gerais
-           ========================================================================== */
+        
         * {
             margin: 0;
             padding: 0;
@@ -125,9 +121,7 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
         }
 
-        /* ==========================================================================
-           Estilização da Seção de Projetos
-           ========================================================================== */
+         
         .section-title-line {
             position: relative;
             border-bottom: 2px solid rgba(255, 255, 255, 0.05);
@@ -203,8 +197,7 @@
             margin-bottom: 20px;
             flex-grow: 1;
         }
-
-        /* Botão do GitHub Estilizado */
+ 
         .btn-github {
             display: inline-flex;
             align-items: center;
@@ -228,11 +221,7 @@
             border-color: var(--primary-color);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
-
-        /* ==========================================================================
-           Media Queries (Responsividade)
-           ========================================================================== */
-        @media (max-width: 768px) {
+         @media (max-width: 768px) {
             .interface-header {
                 flex-direction: column;
                 gap: 15px;
